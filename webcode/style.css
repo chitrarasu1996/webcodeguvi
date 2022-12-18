@@ -1,0 +1,40 @@
+
+body{
+overflow-y: hidden;
+padding-bottom: 100px;
+    overflow-x: auto;
+   font-family: 600;
+}
+#input{
+border: 1px solid yellow;
+border-radius: 9px;
+height: 50%;
+width: 50%;
+display: flex;
+margin-left: 270px;
+
+}
+#heading{
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color: #F5F5F5;
+display: flex;
+justify-content: center;
+
+};
+#inputbox{
+padding-top: 30px;
+    border: 5px solid blue;
+
+};
+mark{
+
+font-weight: 600;
+    
+}
+
+
+::-webkit-input-placeholder {
+    font-family: 600;
+  }
+
