@@ -1,6 +1,6 @@
 
 
-const url="https://api.nationalize.io?name="
+
 
 const div =document.createElement("div");
 div.setAttribute("id","FisrtDiv");
@@ -10,10 +10,10 @@ div.innerHTML=` <div class="p-3 mb-2 bg-success text-white container-fluid ">
 <div id="inputbox">
 <div class=" input-group  "id="input">
   <span class="input-group-text" id="basic-addon1" id="Search"  style="color: black;background-color: orange;" onclick="searchHandler()" >Search</span>
-  <input type="text" class="form-control text-primary class="fs-6""  placeholder="Enter name" aria-label="Username" aria-describedby="basic-addon1"id="searchInput" >
+  <input type="text" class="form-control text-dark text-primary class="fs-6""  placeholder="Enter name" aria-label="Username" aria-describedby="basic-addon1"id="searchInput" >
 </div>
 </div>
-<div id="text " class="textcolor text-center text-sm-left ">
+<div id="text " class="text-center text-sm-left ">
 <h5 id="country1" class="p-3 "></h5>
 <h5 id="country2" class="p-3"></h5>
 </div>
@@ -35,22 +35,17 @@ searchHandler= async()=> {
     
     try {
         searchName = document.getElementById('searchInput').value
-        console.log(searchName);
+       
 const allCountryUrl="https://api.nationalize.io?name="
         let url = await fetch(`${allCountryUrl}${searchName}`)
         let response = await url.json();
-        console.log (response);
-        
 
         for (let i = 0; i <  response.country.length - 3; i++) {
             getAllRecord( response.country[i].country_id,  response.country[i].probability)
 
         }
-
         res.length = 0;
         probability.length = 0;
-
-
         inputchecking();
     }
     catch (err) {
@@ -64,44 +59,32 @@ let probability = [];
 
 
 
-getAllRecord=async(id, prob) =>{
+const getAllRecord=async(id,prob) =>{
 
     const allCountryUrl="https://restcountries.com/v3.1/all";
     let countryNames = await fetch(`${allCountryUrl}`)
     let response = await countryNames.json();
 
-    
+   
     let marray = response.map((response) => {
         return response.cca2
     })
     
+  
     probability.push(prob)
    
-
-
-   
+  
     for (let i = 0; i <  marray .length; i++) {
         if (id==  marray [i]) {
-            console.log(response[i].name.common);
             res.push(response[i].name.common)
         }
     }
-  
 
-
-    console.log(res);
-    console.log(probability);
-
-
-    FirstCcuntry.innerHTML = `The person Name is <mark id="marks">${searchName}</mark> from ${res[0].toUpperCase()} with the Probability of ${probability[0]}`;
-    
-    secondCountry.innerHTML = `and from ${res[1].toUpperCase()} with the Probability of ${probability[1]}`;
-   
-   
-    
+    FirstCcuntry.innerHTML = `The person Name is <mark id="marks">${searchName.toUpperCase()}</mark> from ${res[0].toUpperCase()} with the Probability of ${probability[0]}`;
+    secondCountry.innerHTML = `and from ${res[1]} with the Probability of ${probability[1]}`;   
 };
 
-inputchecking=()=>{
+const inputchecking=()=>{
 
 const getInput=document.getElementById("searchInput").value
 if(!isNaN(getInput)){
